@@ -1,0 +1,126 @@
+vShare (VPuN phase 0 implementation)
+------------------------------------
+
+Goals
+------
+
+	1. Provide a simple CLI interface to receive policies/rules and translate them into data structures that can be passed on to a controller which in turn will install it as a flow.
+
+	2. Provide a vPush server daemon that receives the data structures from the vShare interface and pushes them to the controller at the right time.
+
+Design
+-------
+
+	SPEL
+	-----
+
+	Sharing Policy Expression Language is a specification that tells how users can specify their sharing requirements which are then translated to network flows. A single requirement in SPEL is termed as a POLICY. A POLICY consists of following clauses.
+
+		a. ACTION: One of type ALLOW or DENY. ACTION clause will support following attributes.
+			i. data_cap - A composite attribute that specifies the data cap value and units for the value.
+			ii. rate - A composite attribute that specifies the rate at which data can flow for this particular policy and the units for the rate.
+			Support for other attributes will be added later.
+		b. RULE: A collection of conditions in which this POLICY will apply. RULE clause has an array of attributes, with each attribute representing a CONDITION. CONDTIONs are specified as,
+			i. lvalue - Can be a string or a variable. Variables are identified by the syntax __VARIABLE__
+			ii. rvalue - Can be a string or a variable. Variables are identified by the syntax __VARIABLE__
+			iii. operator - One of the standard conditional operators <,>,<=,>=,==,=~ (matches)
+			iv. next - Optional attribute that specifies the logical relationship with next CONDTION. Can be AND or OR.
+		c. POLICY_ID: A UUID to identify this rule in a cluster.
+		d. NAME: A user readable plain English name.
+		e. EXPIRE: The time-out value for this POLICY specified as standard DateTime or number of seconds.
+		
+	Example rule in JSON format,
+
+	{
+		policy_id: 1,
+		name: 'Share when I sleep',
+		expire: '00:00:00 31 Nov 2013 IST',
+		action: {
+			type:'ALLOW',
+			data_cap: {
+				value: 60
+				unit: 'gb'
+			},
+			rate: {
+				value:4
+				unit: 'mbps'
+			}
+		},
+		condition: [
+			{
+				lvalue: "__TIMEOFDAY__",
+				rvalue: "22:00",
+				operator: ">",
+				next: "AND"
+			},
+			{
+				lvalue: "__TIMEOFDAY__",
+				rvalue: "06:00",
+				operator: "<",
+			}
+		]
+	}
+
+	SPEL Translator
+	----------------
+
+	The translator class for SPEL must be designed to support not just the existing specification but extensions that might arise in the future as well. Keeping in mind, these are the capabilities that this class must have.
+
+	Attributes
+		1. unit_converter - An associative array with keys as various units and values as function references that take the value and desired unit as arguments and return the value converted into a desired unit.
+		2. action_attribute_handler - An associative array with keys as various action attributes and values as function references that convert these attributes into appropriate parts of a flow message.
+		3. action_type_handler - An associative array with keys as action types and values as function reference that convert the provided action type into the appropriate OpenFlow message header.
+		4. variable_parser - An associative array with keys as variable names and values as function references that calculate and return the values of the variables.
+		5. condition_parser - A function reference that converts a condition clause into a condition statement.
+		6. push_flow - A function reference that pushes a translated flow to the vPush daemon.
+
+		
+	vShare CLI
+	-----------
+
+	The CLI of vShare provides following commands.
+
+		1. CONTROLLER IP <controller_ip> PORT <controller_port> - Configure the controller to which vShare must talk to and install flows.
+		2. SHOW POLICIES - List all policies present in the current vShare instance.
+		3. POLICY [ ID <unique_id> NAME <name> EXPIRe <expire_timeout> ] { ACTION TYPE alllow | deny CAP <value> <unit> RATE <value> <unit> } { CONDTION LVALUE <value> RVALUE <value> OPERATOR <operator> NEXT <next conditional operator> ... } - Add a new or modify an existing policy. If policy id is not provided, the policy will be added. The condition sub command can be repeated multiple times to add multiple conditions in sequence.
+		4. NO POLICY <unique id> - Delete existing policy
+		5. TRANSLATE POLICY <unique id> - Translate policy into open flow message and dump on screen.
+		6. VPUSH { STATUS | START | STOP } - vPush operational commands.
+		
+	vPush daemon
+	-------------
+
+	The vPush daemon will be a multi-threaded socket server that will listen on a pre-configured port. The vShare CLI will connect to this server and push flow messages from the translator whenever a policy is added or modified. When a policy is deleted, the same will be relayed to the vPush server. All messages will be relayed via JSON.
+
+	Besides request/response handling,  vPush will run a separate thread that evaluates when a particular flow message must be pushed to the controller based on the condition and do the same. For the current design, we plan to support only time of the day conditions. So vPush will evaluate the condition and trigger two thread timers - one which will add the flow in the controller after 'X' seconds (X evaluated based on the condition that evaluates to true earlier) and second which will delete the flow after Y seconds (Y evaluated based on the condition that evaluates to true later).
+
+	vPush Supported messages
+	------------------------
+
+		Event message format
+			{ 
+				event: "add" | "modify" | "delete",
+				policy: {
+					policy_id : <policy_id>,
+					name: <name>
+					expire: <expire>
+					flow: <translated flow>
+					condition: <translated condition>
+				},
+				message_id: "unique message id"
+			}
+			
+			For delete, the policy_id alone will suffice.
+			
+		Task message format
+			{
+				task: "start" | "stop" | "status", message_id: "unique message id"
+			}
+
+		Response format
+
+			{ 
+				return: "Any return message string" #Return message that the server wishes to pass. Ideally, should be an encoded JSON string, but can be any string.
+				result: 0 or 1 #Depending on whether the requested message was called successfully or not
+				message_id: "unique message id that was received with request"
+			}

@@ -1,0 +1,51 @@
+VpUN possibilities
+
+1. Free internet sharing by using SPEL and distributed Network OS/Controllers.
+
+2. Lab management for enterprise customers - time sharing, resource sharing a la GaleForce, Edentree, Spirent's iLO.
+
+3. Operate as a VNO or RWNO if backing/sponsorship is obtained to add credibility.
+
+4. Provide open platform for third party vendors to innovate in the form of,
+	a. SPEL extensions
+	b. SPEL based high level applications (E.g., An app that allows automatic increase in shared b/w if the connected user is your FB friend.) 
+	c. Applications that make use of usage history and perform actions based on that (E.g., An app that allows me to post on FB how much of my bandwidth has been shared to get some brownie points and compete with friends in being a good Samaritan, An app that automatically configures rules based on my previous usage)
+	d. Reward management applications to boost sharing
+	e. Apps that talk to third party interfaces to make decision (E.g., A foursquare or Google Now integrated app that automatically allows total bandwidth sharing when I check in from a remote location, An app that studies all sharing APs in a given area and automatically selects the best AP.)
+
+ToDo
+
+1. Formally specify SPEL and fine tune. This must cover,
+
+	a. Extensible set of rules that allow support for new actions (other than ALLOW, DENY and LIMIT), new variables and new conditions.
+	b. Hierarchical resolution of rules when multiple rules operate on the same scenario. (E.g., Operator rules take precedence over end user rules, DENY rules take precedence over ALLOW, etc.)
+	
+	ETA - 31 Aug 2013(?)
+
+2. Build a demo that,
+
+	(a) Allows end user to 
+		i. Configure SPEL rules that are installed as flows in the home router.
+		ii. View rules created by self and their validity at the moment (Or they in effect or not?).
+		iii. View current bandwidth usage data. How much is shared (by which flow and by whom)? How much is retained?
+		iv. View predicted usage based on current rules.
+		v. View historical usage data.
+		
+	(b) Allows NO/VNO to
+		i. Configure SPEL rules directed to specific areas which are in turn installed as flows by controller/NOS on appropriate switches.
+		ii. View the network slice as a distributed topology (Reuse FlowVisor/POX/OpenVirtex visualizations?)
+		iii. View rules created by self and their validity at the moment (Or they in effect or not?).
+		iv. View rules created by end users and their validity at the moment (Or they in effect or not?).
+		v. View usage data on each network device.
+		vi. Load balancing and performance graphs
+		
+	(a) can be phase I, target Oct/Nov 2013 (b) phase II target Feb/Mar 2013.
+	
+	With (a) and (b), hit HotSDN and SigCOMM.
+	Note, most of the apps suggested in possibility 4 can be done at phase I.
+		
+Challenges
+
+1. Security and privacy concerns.
+
+2. L2 switches/legacy network elements support (via SDN/IP Peering)?

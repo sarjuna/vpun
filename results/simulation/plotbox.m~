@@ -1,0 +1,182 @@
+l=10
+wf=ones(180,l);
+sf=ones(180,l);
+n=[10:10:100]
+for i=1:l
+   wf(:,i)=load (strcat('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/util/worst_util',num2str(n(i))));
+   sf(:,i)=load (strcat('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/util/simple_util',num2str(n(i))));
+   %n=n+4
+end
+
+h = {wf;sf}
+aboxplot(h,'labels',n)
+legend('with mesh network (worst-fit algorithm)','without mesh network'); 
+hold on
+boxplot(sf)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+l=10
+wf=ones(180,l);
+sf=ones(180,l);
+%n=[0.1:0.01:0.01]
+%n=[0.1,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01]
+n=[10:10:100]
+for i=1:l
+   wf(:,i)=load (strcat('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/util/worst_util',num2str(n(i))));
+   sf(:,i)=load (strcat('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/util/simple_util',num2str(n(i))));
+   %n=n+4
+end
+wf(1,:)=[];
+sf(1,:)=[];
+
+wf1=[mean(wf(:,1)),mean(wf(:,2)),mean(wf(:,3)),mean(wf(:,4)),mean(wf(:,5)),mean(wf(:,6)),mean(wf(:,7)),mean(wf(:,8)),mean(wf(:,9)),mean(wf(:,10))]
+sf1=[mean(sf(:,1)),mean(sf(:,2)),mean(sf(:,3)),mean(sf(:,4)),mean(sf(:,5)),mean(sf(:,6)),mean(sf(:,7)),mean(sf(:,8)),mean(sf(:,9)),mean(sf(:,10))]
+
+dt=[wf1',sf1']
+y=n
+bar(y,dt)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ wf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/util/worst_util50');
+ sf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/util/simple_util50');
+ 
+ y=[0:1:179];
+  y=(20*y)./60
+ figure1 = figure;
+ 
+ axes1 = axes('Parent',figure1,'MinorGridLineStyle','--',...
+    'GridLineStyle',':',...
+    'FontWeight','bold',...
+    'FontSize',12);
+ ylim(axes1,[0 1.0]);
+
+box(axes1,'on');
+grid(axes1,'on');
+hold(axes1,'all');
+
+plot1 = plot(y,wf,'MarkerSize',10,'Marker','none','LineWidth',2);
+%set(plot1(1),'Color',[1 0 0]);
+
+plot2 = plot(y,sf,'MarkerSize',10,'Marker','none','LineWidth',2);
+set(plot2(1),'Color','r');
+
+
+% Create xlabel
+xlabel('time (min)','FontWeight','bold','FontSize',12);
+
+% Create ylabel
+ylabel('Link utilization','FontWeight','bold','FontSize',12);
+legend('with mesh network (worst-fit algorithm)','without mesh network');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+wf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/accept/worst_accept50');
+sf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/accept/simple_accept50');
+ 
+ y=[0:1:179];
+ y=(20*y)./60
+ figure1 = figure;
+ 
+ axes1 = axes('Parent',figure1,'MinorGridLineStyle','--',...
+    'GridLineStyle',':',...
+    'FontWeight','bold',...
+    'FontSize',12);
+ ylim(axes1,[0 0.35]);
+
+box(axes1,'on');
+grid(axes1,'on');
+hold(axes1,'all');
+
+plot1 = plot(y,wf,'MarkerSize',10,'Marker','none','LineWidth',1);
+%set(plot1(1),'Color',[1 0 0]);
+
+plot2 = plot(y,sf,'MarkerSize',10,'Marker','none','LineWidth',1);
+set(plot2(1),'Color','r');
+
+
+% Create xlabel
+xlabel('time (min)','FontWeight','bold','FontSize',12);
+
+% Create ylabel
+ylabel('Link utilization','FontWeight','bold','FontSize',12);
+
+legend('with mesh network','without mesh network');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+wf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/ONaccess/worst_ONaccess50');
+%sf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/ONaccess/simple_ONaccess50');
+ wf=round(wf)
+ wf(1:2)=[]
+ y=[0:1:179];
+ y=(20*y)./60
+ y(1:2)=[]
+ figure1 = figure;
+ 
+ axes1 = axes('Parent',figure1,'MinorGridLineStyle','--',...
+    'GridLineStyle',':',...
+    'FontWeight','bold',...
+    'FontSize',12);
+ ylim(axes1,[0 21]);
+
+box(axes1,'on');
+grid(axes1,'on');
+hold(axes1,'all');
+
+plot1 = plot(y,wf,'MarkerSize',10,'Marker','none','LineWidth',1);
+%set(plot1(1),'Color',[1 0 0]);
+
+% plot2 = plot(y,sf,'MarkerSize',10,'Marker','none','LineWidth',1);
+% set(plot2(1),'Color','r');
+
+
+% Create xlabel
+xlabel('time (hours)','FontWeight','bold','FontSize',12);
+
+% Create ylabel
+ylabel('numbe of active home networks','FontWeight','bold','FontSize',12);
+
+legend('with mesh network (worst-fit algorithm)','without mesh network');
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+wf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/hops/worst_hops50');
+%sf=load ('/home/ah/workspace/home_virtual_network/src/CBR_with_avilability/results/ONaccess/simple_ONaccess50');
+ 
+ y=[0:1:179];
+ y=(20*y)./60
+ figure1 = figure;
+ 
+ axes1 = axes('Parent',figure1,'MinorGridLineStyle','--',...
+    'GridLineStyle',':',...
+    'FontWeight','bold',...
+    'FontSize',12);
+ ylim(axes1,[0 2]);
+
+box(axes1,'on');
+grid(axes1,'on');
+hold(axes1,'all');
+
+plot1 = plot(y,wf,'MarkerSize',10,'Marker','none','LineWidth',1);
+%set(plot1(1),'Color',[1 0 0]);
+
+% plot2 = plot(y,sf,'MarkerSize',10,'Marker','none','LineWidth',1);
+% set(plot2(1),'Color','r');
+
+
+% Create xlabel
+xlabel('time (hr)','FontWeight','bold','FontSize',12);
+
+% Create ylabel
+ylabel('number of hops','FontWeight','bold','FontSize',12);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+x1 = rand(2,3) 
+x2 = .5+rand(2,3) 
+x3 = randn(2,3) 
+
+x = [x1;x2;x3]
+x = x(:) 
+g1 = [ones(size(x1)); 2*ones(size(x2)); 3*ones(size(x3))]
+g1 = g1(:) 
+g2 = repmat(1:3,6,1); g2 = g2(:)
+
+boxplot(x, {g2,g1},'colorgroup',g1, 'factorgap',5, 'factorseparator',1) 

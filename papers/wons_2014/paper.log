@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.7.2)  12 FEB 2014 11:29
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.7.2)  12 FEB 2014 12:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -311,8 +311,27 @@ File: paws-avail.pdf Graphic file (type pdf)
 Package pdftex.def Info: paws-avail.pdf used on input line 29.
 (pdftex.def)             Requested size: 252.0pt x 70.7876pt.
 Missing character: There is no Õ in font ptmr7t!
-)
-(./architecture.tex) (./evaluation.tex
+
+
+./introduction.tex:39: LaTeX Error: Something's wrong--perhaps a missing \item.
+
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.39 \end{enumerate}
+                    
+? 
+
+LaTeX Warning: Reference `sec:methodology' on page 2 undefined on input line 41
+.
+
+
+LaTeX Warning: Reference `sec:discussion' on page 2 undefined on input line 41.
+
+
+) (./architecture.tex) (./evaluation.tex
 <../../results/simulation/on_routers2.pdf, id=13, 531.9875pt x 367.3725pt>
 File: ../../results/simulation/on_routers2.pdf Graphic file (type pdf)
 
@@ -320,8 +339,9 @@ File: ../../results/simulation/on_routers2.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../../results/simulation/on_routers2.pdf used on input
  line 12.
 (pdftex.def)             Requested size: 252.0pt x 174.02165pt.
+ [2 <./paws.pdf> <./paws-avail.pdf> <../../results/simulation/on_routers2.pdf>]
 
-<../../results/simulation/utilization.pdf, id=14, 541.02126pt x 299.1175pt>
+<../../results/simulation/utilization.pdf, id=50, 541.02126pt x 299.1175pt>
 File: ../../results/simulation/utilization.pdf Graphic file (type pdf)
 
 <use ../../results/simulation/utilization.pdf>
@@ -329,21 +349,13 @@ Package pdftex.def Info: ../../results/simulation/utilization.pdf used on input
  line 26.
 (pdftex.def)             Requested size: 252.0pt x 139.32553pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-<../../results/simulation/acceptance_rate.pdf, id=15, 534.99875pt x 371.3875pt>
+<../../results/simulation/acceptance_rate.pdf, id=51, 534.99875pt x 371.3875pt>
 File: ../../results/simulation/acceptance_rate.pdf Graphic file (type pdf)
 <use ../../results/simulation/acceptance_rate.pdf>
 Package pdftex.def Info: ../../results/simulation/acceptance_rate.pdf used on i
 nput line 34.
 (pdftex.def)             Requested size: 252.0pt x 174.93748pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2 <./paws.pdf> <./paws-avail.pdf> <../../results/simulation/on_routers2.pdf>]
 <../../results/simulation/boxplot2.pdf, id=52, 529.98pt x 368.37625pt>
 File: ../../results/simulation/boxplot2.pdf Graphic file (type pdf)
 
@@ -351,10 +363,6 @@ File: ../../results/simulation/boxplot2.pdf Graphic file (type pdf)
 Package pdftex.def Info: ../../results/simulation/boxplot2.pdf used on input li
 ne 44.
 (pdftex.def)             Requested size: 252.0pt x 175.1604pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
 ) (./conclusion.tex)
 
 ** Conference Paper **
@@ -368,23 +376,26 @@ Before submitting the final camera ready copy, remember to:
  process uses the appropriate paper size.
 
 [3 <../../results/simulation/utilization.pdf> <../../results/simulation/accepta
-nce_rate.pdf> <../../results/simulation/boxplot2.pdf>] (./paper.aux) ) 
+nce_rate.pdf> <../../results/simulation/boxplot2.pdf>] (./paper.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 2742 strings out of 493315
- 43639 string characters out of 6137905
+ 2745 strings out of 493315
+ 43678 string characters out of 6137905
  108705 words of memory out of 5000000
- 6141 multiletter control sequences out of 15000+600000
- 35971 words of font info for 69 fonts, out of 8000000 for 9000
+ 6143 multiletter control sequences out of 15000+600000
+ 37078 words of font info for 70 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  42i,16n,24p,1327b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/loc
-al/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2013
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2013/t
-exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/
-fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/typ
-e1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/tim
-es/utmri8a.pfb>
-Output written on paper.pdf (3 pages, 226605 bytes).
+{/usr/local/texlive/2013/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/tex
+live/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/
+texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dis
+t/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
+pe1/urw/times/utmri8a.pfb>
+Output written on paper.pdf (3 pages, 231834 bytes).
 PDF statistics:
  92 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream

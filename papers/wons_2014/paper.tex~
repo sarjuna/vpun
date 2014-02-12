@@ -1,0 +1,99 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{graphicx, subfigure, algorithmic, algorithm, placeins, balance, color}
+\usepackage{epstopdf}
+
+\begin{document}
+
+\title{Towards Crowd-Shared Home Networks}
+
+\author{
+\begin{tabular}{cccc}
+\multicolumn{1}{c}{Ahmed Abujoda$^{\dagger}$} &
+\multicolumn{1}{c}{Arjuna Sathiaseelan$^{\S}$} &
+\multicolumn{1}{c}{Panagiotis Papadimitriou$^{\dagger}$} &
+\multicolumn{1}{c}{Jon Crowcroft$^{\S}$} \\ 
+\end{tabular}\\
+\\
+$^{\dagger}$Institute of Communications Technology, Leibniz Universit\"at Hannover, Germany\\
+\textit{\footnotesize{\{ahmed.abujoda, panagiotis.papadimitriou\}@ikt.uni-hannover.de}}\\
+$^{\S}$Computer Laboratory, University of Cambridge, UK\\
+\textit{\footnotesize{\{arjuna.sathiaseelan, jon.crowcroft\}@cl.cam.ac.uk}} \\
+}
+
+\maketitle
+
+\begin{abstract}
+\input{abstract.tex}
+\end{abstract}
+
+\input{introduction.tex}
+\input{architecture.tex}
+\input{evaluation.tex}
+\input{conclusion.tex}
+
+\section{Acknowledgments}
+This work was partially supported by the EPSRC Grant EP/K012703/1. We would like to thank Richard Mortier for his feedback.
+
+
+%
+% ---- Bibliography ----
+%
+\begin{thebibliography}{15}
+
+%\bibitem{Airjaldi}
+%Airjaldi, http://drupal.airjaldi.com.
+
+%\bibitem{Scotland}
+%G. Bernardi, P. Buneman, and M. K. Marina, Tegola tiered mesh network testbed in rural Scotland, ACM MobiCom 2008 Workshop on Wireless Networks and Systems for Developing Regions (WiNS-DR'08), September 2008.
+
+%\bibitem{RFC5281}
+%P. Funk and S. Blake-Wilson, Extensible Authentication Protocol Tunneled Transport Layer Security Authenticated Protocol Version 0 (EAP-TTLSv0), RFC 5281, August 2018.
+
+%\bibitem{NOX}
+%N. Gude et al., NOX: Towards an operating system for networks, SIGCOM CCR, Vol. 38, No. 3, July 2008, pp. 105-110.
+
+%\bibitem{Hasan}
+%S. Hasan et al., Enhancing rural connectivity with software defined networks, ACM DEV, January 2013.
+
+%\bibitem{UN}
+%F. La Rue, Report of the Special Rapporteur on the promotion and protection of the right to freedom of opinion and expression, Human Rights Council, UN General Assembly, 16 May 2011, http://goo.gl/MDjS7
+
+%\bibitem{Openflow}
+%N. McKeown et al., OpenFlow: Enabling Innovation in Campus Networks, ACM SIGCOMM CCR, Vol. 38, No. 2, pp. 69-74, April 2008.
+
+\bibitem {LCDNet}
+A. Sathiaseelan and J. Crowcroft, LCD-Net: lowest cost denominator networking, ACM SIGCOMM CCR Vol. 43, No. 2,  pp. 52-57, April 2013.
+
+%\bibitem{PAWS}
+%A. Sathiaseelan et al., Public Access WiFi Service (PAWS), Digital Economy All Hands Meeting, Aberdeen, October 2012.
+
+%\bibitem{FlowVisor}
+%R. Sherwood et al., Can the Production Network Be the Testbed?, USENIX OSDI, Vancouver, October 2010.
+
+%\bibitem{Surana}
+%S. Surana et al., Beyond pilots: Keeping rural wireless networks alive, USENIX NSDI, April 2008.
+
+%\bibitem{Odin}
+%L. Suresh et al., Towards programmable enterprise WLANS with Odin, ACM SIGCOMM HotSDN, August 2012.
+
+%\bibitem{Rice}
+%Technology For All, http://tfa.rice.edu/.
+
+%\bibitem{Slicing}
+%Y. Yiakoumis et al., Slicing Home Networks, ACM SIGCOMM HomeNets, Toronto, August 2011.
+
+%\bibitem{Marshini}
+%M. Chetty et al., Refactoring network infrastructure to improve manageability: a case study of home networking. ACM SIGCOMM CCR, Vol. 42, No 3, pp. 54-61, July 2012.
+
+%\bibitem{Mortier}
+%R. Mortier, et al, Control and understanding: Owning your home network, Communication Systems and Networks (COMSNETS), Jaunary 2012.
+
+%\bibitem{oflops}
+%C. Rotsos et al, Oflops: An open framework for openflow switch evaluation, Passive and Active Measurement, Springer Berlin Heidelberg, March 2012.
+
+%\bibitem{bottom}
+%Triple bottom line, $http://en.wikipedia.org/wiki/Triple\_bottom\_line$.
+
+\end{thebibliography}
+
+\end{document}

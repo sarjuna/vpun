@@ -24,9 +24,9 @@ From the acceptance rate, we exclude the flows which are still running and may f
 Due to the large mean values of the ON and OFF period (8 hours OFF and 1.5 hours ON), we run each simulation for 60 hours with time scale of 20 minutes. We perform 20 runs and report the average. 
 
 
-\begin{figure}[h]
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=1\linewidth]{../../results/simulation/on_routers2.pdf}  
+\includegraphics[width=1\linewidth]{results/on_routers.pdf}  
 \caption{Number of active home routers.}
 \label{fig:active_routers}
 \end{center}
@@ -38,17 +38,17 @@ Due to the large mean values of the ON and OFF period (8 hours OFF and 1.5 hours
 
 Initially, we measure the shared bandwidth utilization and request acceptance rate with an arrival rate of 50 flows per minute over a 60-hour period. Fig. \ref{fig:utilization} illustrates a low utilization of the shared bandwidth without a wireles mesh during the whole period, although there is high demand for Internet access by guest users attached to the various home networks. In contrast, a wireless mesh allows to capitilize the unused capacity and accommodate a larger volume of guest user traffic. More precisely, according to Fig. \ref{fig:utilization} guest user traffic redirection through the wireless mesh results in the full utilization of the bandwidth shared by home network users. Furthermore, crowd-shared home networks with a wireless mesh can accommodate substantially higher guest user traffic, as depicted in Fig. \ref{fig:acceptance}. This stems from the high utilization of the shared bandwidth. 
 
-\begin{figure}[h]
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=1\linewidth]{../../results/simulation/utilization.pdf}  
+\includegraphics[width=1\linewidth]{results/utilization.pdf}  
 \caption{Shared bandwidth utilization.}
 \label{fig:utilization}
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=1\linewidth]{../../results/simulation/acceptance_rate.pdf}  
+\includegraphics[width=1\linewidth]{results/acceptance_rate.pdf}  
 \caption{Guest user traffic acceptance rate.}
 \label{fig:acceptance}
 \end{center}
@@ -56,12 +56,22 @@ Initially, we measure the shared bandwidth utilization and request acceptance ra
 
 We further measure the shared bandwidth utilization with a wide range of guest user traffic demands. In this respect, Fig. \ref{fig:acceptance} illustrates the shared bandwidth utilization with diverse flow arrival rates, ranging from 10 to 100 flows per minute. This simulation result corroborates the efficiency of the wireless mesh for various traffic loads, as the shared bandwidth utilization always remains very high. Without the presence of a wireless mesh, Fig. \ref{fig:acceptance} shows poor bandwidth utilization, especially with low guest user traffic demand. In this particular case, the inability to redirect guest user traffic to home networks with available bandwidth results in wasting most of the shared bandwidth. Eventually, our simulation results show the significant benefit that a wireless mesh can bring in crowd-shared home networks, by effectively pooling shared resources across the interconnected home networks. 
 
-\begin{figure}[h]
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=1\linewidth]{../../results/simulation/boxplot2.pdf}  
+\includegraphics[width=1\linewidth]{results/boxplot2.pdf}  
 \caption{Shared bandwidth utilization vs. flow arrival rate.}
 \label{fig:utilization_arrival}
 \end{center}
 \end{figure}
 
+According to our simulations, redirected guest user traffic traverses up to 4 hops across the wireless mesh, depending on the home router that has been selected as the Internet gateway. Since this may introduce additional delay and possible variation of delay which may be perceptible by guest users, we measure the shared bandwidth utilization while restricting the number of hops that guest user traffic can traverse. In this respect, Fig. \ref{fig:hop_count} illustrates the shared bandwidth utilization for diverse hop-count thresholds ranging from 1 to 3, and without any limit in the hop count. Restricting the number of hops has a noticeable impact on bandwidth utilization, especially for a single hop, since Internet access is permitted only through one of the next-hop home routers. In essence, there is a trade-off between coverage extension (and thus effective bandwidth utilization) and latency. This may become more critical in large wireless mesh networks, where multi-hop wireless links can inflate latency.
+
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=1\linewidth]{results/hops_vs_BW.pdf}  
+\caption{Shared bandwidth utilization for diverse hop-count threshold values vs. flow arrival rate.}
+\label{fig:hop_count}
+\end{center}
+\end{figure}
 

@@ -31,22 +31,20 @@ SDN can facilitate the management and operation of wireless networks at large sc
 
 To take advantage of the extended coverage provided by a WMN, we develop and evaluate techniques for the redirection of guest user traffic during the periods that the home user does not permit the sharing of his broadband connection. In this case, Internet is accessed through the router of another home network where sharing is allowed. 
 
-In the following, we present an algorithm for the assignment of the gateway and the path over which the traffic will be redirected through the WMN. We assume that this algorithm will be executed by a SDN controller which has knowledge of the WMN topology and utilization as well as the broadband network utilization and user sharing policies. 
+In the following, we present an algorithm (Algorithm \ref{alg:assignment}) for the assignment of the gateway and the path over which the traffic will be redirected through the WMN. We assume that this algorithm will be executed by a SDN controller which has knowledge of the WMN topology and utilization as well as the broadband network utilization and user sharing policies. 
 
-We represent the WMN as a weighted undirected graph $G = (N, L)$, where $N$ is the set of nodes and $L$ is the set of links between nodes of the set $N$. Each node $n_i$ is associated with an Internet access link whose available bandwidth capacity is denoted by $C(n_i)$. Each link $l_{ij} \in L$ between two nodes $n_i$ and $n_j$ is associated with the available bandwidth capacity $C(l_{ij})$. Let $P_{ij}$ denote the set of paths in the network $G$, between the pair of nodes $n_i$ and $n_j$. The available bandwidth capacity $C(p)$ associated to a path $p \in P_{ij}$ is given by the minimal residual bandwidth of the links along the path:
+We represent the WMN as a weighted undirected graph $G = (N, L)$, where $N$ is the set of nodes and $L$ is the set of links between nodes of the set $N$. Each node $n_i$ is associated with an Internet access link whose available shared bandwidth is denoted by $C(n_i)$. Each link $l_{ij} \in L$ between two nodes $n_i$ and $n_j$ is associated with the available bandwidth $C(l_{ij})$. Let $P_{ij}$ denote the set of paths in the network $G$, between the pair of nodes $n_i$ and $n_j$. The available bandwidth $C(p)$ associated to a path $p \in P_{ij}$ is given by the minimum residual bandwidth of the links along the path:
 
 \begin{equation}
 C(p) = \min_{l_{ij} \in p} C(l_{ij}))
 \end{equation}
-
-%Let $M$ denote a link capacity matrix associated to the graph $G$, such that $M$=[$C(l_{ij})$] is the available bandwidth capacity matrix for links $l \in L$ between nodes $n_i$ and $n_j$, where $1 \leq i,j \leq |N|$.
 
 We further represent a flow demand for a guest user with the tuple $d = (n_u, r)$, where $n_u \in N$ is the node where the guest user device has been attached and $r$ denotes the flow rate. We use $D$ to represent the set of flow demands that have arrived in the system.
 
 \algsetup{indent=0em}
 \begin{algorithm}[htbp]
   \caption{Gateway and Path Assignment}
-  \label{assignment}
+  \label{alg:assignment}
   \begin{algorithmic}
   \small
     \STATE \textbf{Inputs}: $G = (N, L), D$
@@ -57,9 +55,9 @@ We further represent a flow demand for a guest user with the tuple $d = (n_u, r)
     \vspace{0.7mm}
     \STATE \hspace{0.4cm} $search \leftarrow$ true
     \vspace{0.7mm}
-    \STATE \hspace{0.4cm} $M \leftarrow \{N \setminus {n_u}\}$
+    \STATE \hspace{0.4cm} $M \leftarrow \{N \setminus {n_u}\}$ \hspace{0.3cm} // $M:$ candidate set of routers
     \vspace{0.7mm}
-    \STATE \hspace{0.4cm} \textbf{while} ($search$)
+    \STATE \hspace{0.4cm} \textbf{while} ($search$ AND $M \neq \emptyset$)
     \vspace{0.7mm}
     \STATE \hspace{0.8cm} $g \leftarrow argmax_{i \in M} C(n_i)$
     \vspace{0.7mm} 
@@ -79,22 +77,22 @@ We further represent a flow demand for a guest user with the tuple $d = (n_u, r)
     \vspace{0.7mm}
     \STATE \hspace{0.8cm} \textbf{else}
     \vspace{0.7mm}
+    \STATE \hspace{1.2cm} gateway $\leftarrow n_g$ \hspace{0.6cm} // gateway assignment
+    \vspace{0.7mm}
+    \STATE \hspace{1.2cm} $path \leftarrow \mathrm{SP} (P_{ug})$ \hspace{0.3cm} // path assignment
+    \vspace{0.7mm}
     \STATE \hspace{1.2cm} $search \leftarrow$ false
     \vspace{0.7mm}
     \STATE \hspace{0.8cm} \textbf{end if}
     \vspace{0.7mm}
     \STATE \hspace{0.4cm} \textbf{end while}
     \vspace{0.7mm}
-    \STATE \hspace{0.4cm} $n_g \leftarrow$ gateway \hspace{0.2cm} // gateway assignment
-    \vspace{0.7mm}
-    \STATE \hspace{0.4cm} $p \leftarrow \mathrm{SP} (P_{ug})$ \hspace{0.3cm} // path assignment
-    \vspace{0.7mm}
     \ENDFOR
   \end{algorithmic}
 \end{algorithm}
 
-The algorithm assigns a gateway and the best path to each flow demand from the set $D$. The algorithm is executed whenever there is insufficient shared bandwidth in the local home network. Initially the flow demands are sorted based on the flow rate in decreasing order. For each flow demand, the algorithm selects the home router with the highest bandwidth in its access link (i.e., $C(n_i)$). Subsequently, the algorithm identifies the set of paths between the local home router ($n_u$) and the assigned gateway ($n_g$) that satisfy the flow rate requirement (Equation 1). In case there is no such path, the algorithm performs another iteration for the selection of the gateway, excluding the previously selected home router. Otherwise, the shortest among these paths is being identified based on the number of hops (SP function in the algorithm). This eventually designates the path for the traffic redirection through the WMN.
+The algorithm assigns a gateway and the shortest path to each flow demand from the set $D$. The algorithm is executed whenever there is insufficient shared bandwidth in the local home network. Initially the flow demands are sorted based on the flow rate in decreasing order. For each flow demand, the algorithm selects the home router with the highest bandwidth in its access link (i.e., $C(n_i)$). Subsequently, the algorithm identifies the set of paths between the local home router ($n_u$) and the assigned gateway ($n_g$) that satisfy the flow rate requirement (Equation 1). In case there is no such path, the algorithm performs another iteration for the selection of the gateway, excluding the previously selected home router. Otherwise, the shortest among these paths is being identified based on the number of hops (SP function in the algorithm). This eventually designates the path for the traffic redirection through the WMN.
 
-This algorithm carries out the gateway assignment based on the available shared bandwidth of the home routers in the crowd-shared network. Although this can pool resources from all home networks where sharing is permitted achieving efficient utilization of the shared bandwidth, guest user traffic may have to traverse multiple hops in the WMN. This can lead to latency inflation, delay variation and in general, unpredictable performance. To mitigate this, we also use a variant of this algorithm by introducing a threshold in the number of hops between the local home router and the assigned gateway. For example, setting the threshold to 1, restricts the gateway assignment to one of the next-hop routers with sufficient shared bandwidth.
+This algorithm carries out the gateway assignment based on the available shared bandwidth of the home routers in the crowd-shared network. Although this can pool resources from all home networks where sharing is permitted achieving efficient utilization of the shared bandwidth, guest user traffic may have to traverse multiple hops in the WMN. This can lead to latency inflation, delay variation and in general, unpredictable performance. To mitigate this, we further use a variant of this algorithm by introducing a threshold in the number of hops between the local home router and the assigned gateway. For example, adjusting the threshold to 1 restricts the search space to the next-hop routers with sufficient shared bandwidth.
 
 

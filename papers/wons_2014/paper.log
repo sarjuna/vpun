@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.7.2)  14 FEB 2014 17:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.7.2)  14 FEB 2014 17:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -792,12 +792,12 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 36.
  [3 <./flow_redirection.pdf>]) (./evaluation.tex
-<results/on_routers.pdf, id=1470, 531.9875pt x 367.3725pt>
+<results/on_routers.pdf, id=1470, 584.1825pt x 383.4325pt>
 File: results/on_routers.pdf Graphic file (type pdf)
 
 <use results/on_routers.pdf>
 Package pdftex.def Info: results/on_routers.pdf used on input line 19.
-(pdftex.def)             Requested size: 252.0pt x 174.02165pt.
+(pdftex.def)             Requested size: 252.0pt x 165.39932pt.
  <topology.pdf, id=1471, 658.46pt x 377.41pt>
 File: topology.pdf Graphic file (type pdf)
 
@@ -805,33 +805,33 @@ File: topology.pdf Graphic file (type pdf)
 Package pdftex.def Info: topology.pdf used on input line 30.
 (pdftex.def)             Requested size: 252.0pt x 144.43658pt.
 
-<results/utilization.pdf, id=1472, 534.99875pt x 368.37625pt>
+<results/utilization.pdf, id=1472, 587.19376pt x 384.43625pt>
 File: results/utilization.pdf Graphic file (type pdf)
 
 <use results/utilization.pdf>
 Package pdftex.def Info: results/utilization.pdf used on input line 54.
-(pdftex.def)             Requested size: 252.0pt x 173.51907pt.
+(pdftex.def)             Requested size: 252.0pt x 164.98172pt.
 
-<results/acceptance_rate.pdf, id=1473, 534.99875pt x 371.3875pt>
+<results/acceptance_rate.pdf, id=1473, 587.19376pt x 387.4475pt>
 File: results/acceptance_rate.pdf Graphic file (type pdf)
 
 <use results/acceptance_rate.pdf>
 Package pdftex.def Info: results/acceptance_rate.pdf used on input line 62.
-(pdftex.def)             Requested size: 252.0pt x 174.93748pt.
+(pdftex.def)             Requested size: 252.0pt x 166.27402pt.
  [4 <./results/on_routers.pdf> <./topology.pdf>] <results/boxplot2.pdf, id=1485
-, 529.98pt x 354.32375pt>
+, 583.17876pt x 399.4925pt>
 File: results/boxplot2.pdf Graphic file (type pdf)
 
 <use results/boxplot2.pdf>
 Package pdftex.def Info: results/boxplot2.pdf used on input line 73.
-(pdftex.def)             Requested size: 252.0pt x 168.47853pt.
+(pdftex.def)             Requested size: 252.0pt x 172.62573pt.
 
-<results/hops_vs_BW.pdf, id=1486, 581.17125pt x 402.50375pt>
+<results/hops_vs_BW.pdf, id=1486, 592.2125pt x 402.50375pt>
 File: results/hops_vs_BW.pdf Graphic file (type pdf)
 
 <use results/hops_vs_BW.pdf>
 Package pdftex.def Info: results/hops_vs_BW.pdf used on input line 84.
-(pdftex.def)             Requested size: 252.0pt x 174.52881pt.
+(pdftex.def)             Requested size: 252.0pt x 171.27371pt.
 ) (./conclusion.tex [5 <./results/utilization.pdf> <./results/acceptance_rate.p
 df> <./results/boxplot2.pdf> <./results/hops_vs_BW.pdf>])
 
@@ -866,7 +866,7 @@ live/2013/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/
 texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2013/texmf-dis
 t/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (6 pages, 552664 bytes).
+Output written on paper.pdf (6 pages, 552714 bytes).
 PDF statistics:
  1548 PDF objects out of 1728 (max. 8388607)
  1051 compressed objects within 11 object streams

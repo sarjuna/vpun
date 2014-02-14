@@ -6,9 +6,13 @@ In this section, we quantify the benefits of using a wireless mesh in crowd-shar
 \subsection{Simulation Environment}
 \label{evaluation:environment}
 
-Using python, we developed a discrete event simulator to model the behavior of guest flows in a crowd-shared network connected through a wireless mesh network. We use the TFA wireless mesh topology \cite{}, that consist of 21 nodes to model a network of access home routers. Each router possesses an Internet connection from which it provides potential guests with a maximum of 8 Mbps in upload direction. In addition, the nodes are interconnected using an 802.11ac wireless mesh network with a capacity of 200 Mbps.
+%Using python, we developed a discrete event simulator to model the behavior of guest flows in a crowd-shared network connected through a wireless mesh network. We use the TFA wireless mesh topology \cite{}, that consist of 21 nodes to model a network of access home routers. Each router possesses an Internet connection from which it provides potential guests with a maximum of 8 Mbps in upload direction. In addition, the nodes are interconnected using an 802.11ac wireless mesh network with a capacity of 200 Mbps.
 
-We model the availability of the home access routers using an on-off Markov chain. On and off times are exponentially distributed with mean values $\mu_{on = 106}$ min and $\mu_{off} = 555$ min. We parameterize the exponential distributions using real world data collected from a wireless mesh network in the UK.  To reflect real world traffic, we consider guest flows that arrive to the network according to a Poisson process. Each flow has a constant bit rate which is sampled out of a uniform distribution.
+We developed a simulator that models the behaviour of guests users flows in a crowd-shared WMN. The simulator uses TFA wireless mesh topology [] which consists of 21 nodes (fig. \ref{fig:topology}). Each node in this figure represents a home router with shared internet access bandwidth, whereas each edge is a wireless mesh link. The simulator randomly generates guest users flows at different home routers. Each generated flow has a rate and lifetime sampled out of a uniform and an exponential distribution, respectively. The guests flows arrive to the network according to Poisson process. 
+
+We model the availability of the home access routers using an on-off Markov chain. On and off times are exponentially distributed with mean values $\mu_{on = 106}$ min and $\mu_{off} = 555$ min. We parameterize the exponential distributions using real world data collected from a wireless mesh network in the UK. Figure \ref{fig:active_routers} shows the number of active routers along 60-hours of simulation. We can see that out of 21 routers less than 12 routers are simultaneously available. 
+
+%To reflect real world traffic, we consider guest flows that arrive to the network according to a Poisson process. Each flow has a constant bit rate which is sampled out of a uniform distribution.
 
 \begin{figure}[t]
 \begin{center}
@@ -18,7 +22,7 @@ We model the availability of the home access routers using an on-off Markov chai
 \end{center}
 \end{figure}
 
-To grant Internet access to the flows, the simulator implements two methods. The first method only give access to flows through the router at which they arrive given that there is enough internet access capacity. This method ignores the mesh network. On the other hand, the second method considers the mesh network by redirecting flows which does not fit in the local access routers to other routers through the mesh network. The router to which the flow is redirected are selected using worst-fit decreasing algorithm. The algorithm starts by sorting the flows to be redirected in non-decreasing order of their rates. Then, for each flow (starting with the flow with the highest rate), the algorithm selects the router with the highest available internet access capacity which fits the flow rate. The shortest path between the router is chosen based on the number of hops. The worst-fit decreasing algorithm is also used to redirect flows when a router goes OFF. This sustains as much as possible flows in the network and reduce disruption by the routers owners sharing policy.
+%To grant Internet access to the flows, the simulator implements two methods. The first method only give access to flows through the router at which they arrive given that there is enough internet access capacity. This method ignores the mesh network. On the other hand, the second method considers the mesh network by redirecting flows which does not fit in the local access routers to other routers through the mesh network. The router to which the flow is redirected are selected using worst-fit decreasing algorithm. The algorithm starts by sorting the flows to be redirected in non-decreasing order of their rates. Then, for each flow (starting with the flow with the highest rate), the algorithm selects the router with the highest available internet access capacity which fits the flow rate. The shortest path between the router is chosen based on the number of hops. The worst-fit decreasing algorithm is also used to redirect flows when a router goes OFF. This sustains as much as possible flows in the network and reduce disruption by the routers owners sharing policy.
 %Furthermore, to show performance of the system under dynamic communication pattern, we consider flows with limited life time which arrive and leave the system at certain time point.
 
 \begin{figure}[t]
@@ -29,13 +33,19 @@ To grant Internet access to the flows, the simulator implements two methods. The
 \end{center}
 \end{figure}
 
-The simulation proceeds in discrete time ticks. At each time tick, the simulator updates the ON/OFF timer of the access routers and subsequently switches the routers with expired timer ON or OFF depending on their current status. It also removes flows which expires and generates new flows if required. Furthermore, it assigns flows to home access routers either without considering the mesh network (method 1) or with the mesh network (method 2). When the mesh network is considered, the simulator also updates the available capacity of the mesh links through which the flows are redirected.
+The simulation proceeds in discrete time ticks. At each time tick, the simulator updates the ON/OFF time of each router, removes expired flows and generates new flows if required. Furthermore, the simulator assign each new flow internet access (a gateway) through their local routers or redirect them to a remote routers based on the algorithm explained in section II-B. The redirection also takes place when routers go off. For each assigned or redirected flow, the simulator updates the available bandwidth of the corresponding router and mesh links.
 
-To evaluate the benefits of mesh network, we measure the average shared bandwidth utilization of the access router as well as the accumulated acceptance rate of the network at each time tick. At time tick $t$, we define \emph{the accumulated acceptance rate= the total rates of flows finished up to $t$ / (the total rates of flows finished up to $t$ + total rates of flows rejected up to $t$)}.
-%${the accumulated acceptance rate =\displaystyle \frac{the\ total\ rates\ of\ flows\ finished\ up\ to\ t} {(the total rates of flows finished up to t + total rates of rejected flows up to t)}}$.
-From the acceptance rate, we exclude the flows which are still running and may finish in the future.
+We compare between crowd-shared home with WMN and without WMN. For each case, we measure the shared bandwidth utilization of the access router as well as the accumulated acceptance rate at each time tick. We define the accumulated acceptance rate $ACR(T)$ at time tick $T$ as :
+\vspace{-3mm}
+\begin{equation}\label{1}
+ACR(T)= \frac{\Sigma^T_t R^{finished}_{t}}{(\Sigma^T_t R^{finished}_{t} + \Sigma^T_t R^{rejected}_{t})}
+\end{equation}
+\vspace{-2mm}
 
-Due to the large mean values of the ON and OFF period (8 hours OFF and 1.5 hours ON), we run each simulation for 60 hours with time scale of 20 minutes. We perform 20 runs and report the average.
+%${the accumulated acceptance rate =\displaystyle \frac{the\ total\ rates\ of\ flows\ finished\ up\ to\ t} {(the total rates of flows finished up to t + total rates of rejected flows up to t)}}$. 
+$R^{finished}_{t}$ denotes the total rates of the flows at time $t$ which are accepted (assigned internet access) and finished successfully without disruption due to router unavailability. $R^{rejected}_{t}$ denotes the total rates of the flows at time $t$ which are rejected (did assigned internet access). 
+
+Due to the large mean values of the ON and OFF times (8 hours OFF and 1.5 hours ON), we run each simulation for 60 hours with time scale of 20 minutes. We perform 20 runs and report the average. We set the shared bandwidth per router to 8 Mbps assuming that each router has a 16 Mbps ADSL access link. We run our simulation with mesh link capacity of 200, 54 and 10 Mbps, however, our results did not show significant difference. 
 
 \subsection{Simulation Results}
 \label{evaluation:results}

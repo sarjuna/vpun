@@ -45,7 +45,7 @@ ACR(T)= \frac{\Sigma^T_t R^{finished}_{t}}{(\Sigma^T_t R^{finished}_{t} + \Sigma
 %${the accumulated acceptance rate =\displaystyle \frac{the\ total\ rates\ of\ flows\ finished\ up\ to\ t} {(the total rates of flows finished up to t + total rates of rejected flows up to t)}}$. 
 $R^{finished}_{t}$ denotes the total rates of the flows at time $t$ which are accepted (assigned internet access) and finished successfully without disruption due to router unavailability. $R^{rejected}_{t}$ denotes the total rates of the flows at time $t$ which are rejected (not assigned internet access). 
 
-Due to the large mean values of the ON and OFF times (8 hours OFF and 1.5 hours ON), we run each simulation for 60 hours with time scale of 20 minutes. We perform 20 runs and report the average. We set the shared bandwidth per router to 8 Mbps assuming that each router has a 16 Mbps ADSL access link. We run our simulation with mesh link capacity of 200, 54 and 10 Mbps, however, our results did not show significant difference. 
+Due to the large mean values of the ON and OFF times (8 hours OFF and 1.5 hours ON), we run each simulation for 60 hours with time scale of 20 minutes. We perform 20 runs and report the average. We set the shared bandwidth per router to 8 Mbps assuming that each router has a 16 Mbps ADSL access link. We run our simulation with mesh link capacity of 200, 54 and 10 Mbps, however, our results did not show significant difference. This is due to the small total shared internet access bandwidth (168Mbps) in comparison to the total capacity of the mesh links (960 Mbps).
 
 \subsection{Simulation Results}
 \label{evaluation:results}
